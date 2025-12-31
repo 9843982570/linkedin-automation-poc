@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -24,10 +25,28 @@ func main() {
 	page := b.MustPage("https://example.com")
 	page.MustWaitLoad()
 
-	stealth.RandomDelay(
-		cfg.Timing.MinDelayMs,
-		cfg.Timing.MaxDelayMs,
-	)
+	fmt.Println("Page loaded. Starting human-like scrolling...")
+
+	// Scroll DOWN
+	for i := 0; i < 5; i++ {
+		page.MustEval(`() => window.scrollBy(0, 300)`)
+		stealth.RandomDelay(
+			cfg.Timing.MinDelayMs,
+			cfg.Timing.MaxDelayMs,
+		)
+	}
+
+	// Scroll UP
+	for i := 0; i < 5; i++ {
+		page.MustEval(`() => window.scrollBy(0, -300)`)
+		stealth.RandomDelay(
+			cfg.Timing.MinDelayMs,
+			cfg.Timing.MaxDelayMs,
+		)
+	}
+
+	fmt.Println("Human-like scrolling completed.")
 
 	time.Sleep(3 * time.Second)
 }
+
