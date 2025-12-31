@@ -1,0 +1,11 @@
+browser:
+  headless: false
+  slow_motion_ms: 200
+
+limits:
+  daily_connections: 20
+  daily_messages: 30
+
+timing:
+  min_delay_ms: 1000
+  max_delay_ms: 3000
